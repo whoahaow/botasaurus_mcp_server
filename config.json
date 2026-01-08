@@ -1,0 +1,54 @@
+{
+  "server": {
+    "name": "botasaurus-mcp-server",
+    "version": "1.0.0",
+    "protocol_version": "2025-06-18"
+  },
+  "security": {
+    "session_timeout_minutes": 30,
+    "rate_limit": {
+      "browser": 1,
+      "request": 30,
+      "task": 30
+    },
+    "allowed_domains": [],
+    "blocked_domains": [
+      "localhost",
+      "127.0.0.1",
+      "192.168.",
+      "10.",
+      "172."
+    ]
+  },
+  "tools": {
+    "web_search": {
+      "enabled": true,
+      "max_results": 50
+    },
+    "visit_page": {
+      "enabled": true,
+      "max_content_length": 100000
+    },
+    "load_more": {
+      "enabled": true
+    },
+    "scrape_social_profile": {
+      "enabled": true
+    },
+    "extract_news_article": {
+      "enabled": true
+    },
+    "scrape_product": {
+      "enabled": true
+    },
+    "scrape_business_info": {
+      "enabled": true
+    },
+    "monitor_webpage": {
+      "enabled": true
+    },
+    "download_document": {
+      "enabled": true
+    }
+  }
+}
