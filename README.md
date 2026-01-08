@@ -84,7 +84,7 @@ The server can be run as an MCP endpoint that AI applications can connect to. It
 ### Web Search
 ```json
 {
-  "name": "web_search",
+  "name": "botasaurus_search",
   "arguments": {
     "query": "Python programming tutorials",
     "max_results": 10

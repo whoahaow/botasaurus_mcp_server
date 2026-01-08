@@ -4,7 +4,7 @@
 
 ```json
 {
-  "name": "web_search",
+  "name": "botasaurus_search",
   "arguments": {
     "query": "artificial intelligence trends 2025",
     "max_results": 5
@@ -72,7 +72,7 @@ Here's a complete example of how to use the tools in sequence:
 1. **Search for relevant pages:**
 ```json
 {
-  "name": "web_search",
+  "name": "botasaurus_search",
   "arguments": {
     "query": "Python web scraping tutorial",
     "max_results": 3

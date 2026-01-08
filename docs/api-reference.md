@@ -2,7 +2,7 @@
 
 ## Web Search Tool
 
-### `web_search`
+### `botasaurus_search`
 Perform web searches and return structured results.
 
 **Arguments:**

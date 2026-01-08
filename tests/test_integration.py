@@ -14,7 +14,7 @@ from botasaurus_mcp_server import (
     mcp,
     validate_url,
     session_manager,
-    _web_search_impl as web_search,
+    _web_search_impl as botasaurus_search,
     _load_more_impl as load_more
 )
 import asyncio
@@ -67,17 +67,17 @@ class TestIntegration:
         print("Testing data integrity...")
 
         # Test that tool functions are properly defined
-        assert callable(web_search)
+        assert callable(botasaurus_search)
         assert callable(load_more)
 
         # Test that server has the expected tools registered
         # (We can't directly access the tools list in FastMCP, but we can test that they exist)
         try:
-            result = asyncio.run(web_search("test", 1))
+            result = asyncio.run(botasaurus_search("test", 1))
             assert "query" in result
             assert result["query"] == "test"
         except Exception:
-            # If web search fails, that's OK for this test
+            # If botasaurus search fails, that's OK for this test
             pass
 
         print("  PASS Data integrity test passed")

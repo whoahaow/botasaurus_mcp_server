@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # Import the server instance and its tools
 from botasaurus_mcp_server import (
     mcp,
-    _web_search_impl as web_search,
+    _web_search_impl as botasaurus_search,
     _visit_page_impl as visit_page,
     _load_more_impl as load_more,
     _scrape_social_profile_impl as scrape_social_profile,
@@ -77,12 +77,12 @@ class TestFastMCPBotasaurus:
         print("  PASS URL validation test passed")
         self.test_results["url_validation"] = "PASSED"
 
-    def test_web_search_tool(self):
-        """Test the web search tool"""
-        print("Testing web search tool...")
+    def test_botasaurus_search_tool(self):
+        """Test the botasaurus search tool"""
+        print("Testing botasaurus search tool...")
 
-        # Test the async web search function directly
-        result = asyncio.run(web_search("Python programming", 3))
+        # Test the async botasaurus search function directly
+        result = asyncio.run(botasaurus_search("Python programming", 3))
 
         assert "query" in result
         assert "results" in result
@@ -91,8 +91,8 @@ class TestFastMCPBotasaurus:
         assert result["total_results"] == 3
         assert len(result["results"]) == 3
 
-        print(f"  PASS Web search returned {result['total_results']} results for '{result['query']}'")
-        self.test_results["web_search"] = "PASSED"
+        print(f"  PASS Botasaurus search returned {result['total_results']} results for '{result['query']}'")
+        self.test_results["botasaurus_search"] = "PASSED"
 
     def test_session_manager(self):
         """Test session manager functionality"""
@@ -165,7 +165,7 @@ class TestFastMCPBotasaurus:
         tests_to_run = [
             self.test_server_instance,
             self.test_url_validation,
-            self.test_web_search_tool,
+            self.test_botasaurus_search_tool,
             self.test_session_manager,
             self.test_load_more_tool,
             self.test_other_tools_simulation,

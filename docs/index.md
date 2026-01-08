@@ -85,7 +85,7 @@ The server can be run as an MCP endpoint that AI applications can connect to. It
 ### Web Search
 ```json
 {
-  "name": "web_search",
+  "name": "botasaurus_search",
   "arguments": {
     "query": "Python programming tutorials",
     "max_results": 10
@@ -162,7 +162,7 @@ The server implements the MCP protocol with:
 
 ## Tools Reference
 
-### web_search
+### botasaurus_search
 - **Description**: Perform web searches and return structured results
 - **Arguments**:
   - `query` (string): The search query

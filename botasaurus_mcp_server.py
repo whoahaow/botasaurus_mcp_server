@@ -83,9 +83,9 @@ mcp = FastMCP(
     name="Botasaurus MCP Server",
     instructions="""You have access to web scraping tools that can search the web, visit pages, and extract content. Here's how to use them effectively:
 
-WEB SEARCH: Use web_search to find information and URLs when you don't have specific links. Always start with this tool if you need to find new information.
+WEB SEARCH: Use botasaurus_search to find information and URLs when you don't have specific links. Always start with this tool if you need to find new information.
 
-VISIT PAGES: Use visit_page to extract content from URLs. The content comes as text in chunks of up to 5000 characters. Always use visit_page after getting URLs from web_search.
+VISIT PAGES: Use visit_page to extract content from URLs. The content comes as text in chunks of up to 5000 characters. Always use visit_page after getting URLs from botasaurus_search.
 
 LOAD MORE: If visit_page returns 'has_more_chunks': true, use load_more to get additional content. Continue until has_more_chunks becomes false.
 
@@ -99,7 +99,7 @@ SPECIALIZED TOOLS: For specific content types, use:
 - scrape_product: For product information
 
 WORKFLOW EXAMPLES:
-- To research a topic: web_search → visit_page → search_on_page
+- To research a topic: botasaurus_search → visit_page → search_on_page
 - To read a long article: visit_page → check has_more_chunks → load_more if needed
 - To find specific info: visit_page → search_on_page → search_next_on_page if needed"""
 )
@@ -167,11 +167,11 @@ async def _web_search_impl(query: str, max_results: int = 10) -> Dict[str, Any]:
 
 
 @mcp.tool(
-    name="web_search",
-    title="Web Search",
+    name="botasaurus_search",
+    title="Botasaurus Search",
     description="Perform web searches and return structured results from the internet. Use this tool when you need to find current information, research topics, or discover URLs related to a specific query. The tool uses DuckDuckGo search engine to provide unbiased results with titles, URLs, and snippets. Ideal for initial research, fact-checking, or finding resources on a topic.",
 )
-async def web_search(query: str, max_results: int = 10) -> Dict[str, Any]:
+async def botasaurus_search(query: str, max_results: int = 10) -> Dict[str, Any]:
     """Perform a web search (simulated - in a real implementation, this would use a search API)"""
     return await _web_search_impl(query, max_results)
 
@@ -256,7 +256,7 @@ def _visit_page_impl(url: str) -> Dict[str, Any]:
 @mcp.tool(
     name="visit_page",
     title="Visit and Extract Page Content",
-    description="Visit a webpage and extract its content as plain text. Use this tool when you need to read the content of a specific URL that was found through web_search or provided directly. The tool extracts content as plain text and automatically chunks large pages for efficient processing. The content is automatically chunked for large pages, allowing you to load more content later using the load_more tool.",
+    description="Visit a webpage and extract its content as plain text. Use this tool when you need to read the content of a specific URL that was found through botasaurus_search or provided directly. The tool extracts content as plain text and automatically chunks large pages for efficient processing. The content is automatically chunked for large pages, allowing you to load more content later using the load_more tool.",
 )
 def visit_page(url: str) -> Dict[str, Any]:
     """Task to visit a page and extract content as text"""

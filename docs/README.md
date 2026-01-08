@@ -25,7 +25,7 @@ Welcome to the Botasaurus MCP Server documentation. This Model Context Protocol 
 
 ## Available Tools
 
-- `web_search` - Real web searches via DuckDuckGo
+- `botasaurus_search` - Real web searches via DuckDuckGo
 - `visit_page` - Page content extraction with automatic chunking
 - `load_more` - Load next content chunks automatically
 - `search_on_page` - Search for text within page content
