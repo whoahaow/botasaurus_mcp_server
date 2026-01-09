@@ -1,10 +1,66 @@
 # Python-generated files
 __pycache__/
 *.py[oc]
+*$py.class
 build/
 dist/
 wheels/
 *.egg-info
+.installed.cfg
 
 # Virtual environments
 .venv
+env/
+ENV/
+venv/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Runtime
+.pycache/
+.coverage
+coverage.xml
+*.gcda
+*.gcno
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Output files from botasaurus
+output/
+
+# Node modules (if any)
+node_modules/
+
+# Secrets and credentials
+secrets/
+credentials.json
+*.key
+*.pem
+*.crt
+*.cert
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# System files
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?

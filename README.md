@@ -5,6 +5,12 @@ This is a Model Context Protocol (MCP) server that provides AI applications with
 ## Features
 
 - **Real Web Search**: Perform actual web searches via DuckDuckGo and return real results
+- **Advanced Anti-Detection**: Built-in anti-detection measures to avoid bot blocking
+  - Automatic image blocking to appear more like a real user
+  - Anti-detection Chrome arguments to prevent automation detection
+  - Randomized sleep intervals to mimic human behavior
+  - Cloudflare bypass capabilities
+- **Auto-Retry Functionality**: Automatic retry mechanism with configurable attempts and delays
 - **Page Content Extraction**: Visit webpages and extract content as plain text
 - **Automatic Content Chunking**: Content is automatically split into 5000-character chunks
 - **Load More Functionality**: Load next content chunks automatically without parameters

@@ -176,10 +176,19 @@ async def botasaurus_search(query: str, max_results: int = 10) -> Dict[str, Any]
     return await _web_search_impl(query, max_results)
 
 
-def _visit_page_impl(url: str) -> Dict[str, Any]:
+def _visit_page_impl(url: str, format: str = "text") -> Dict[str, Any]:
     """Internal implementation of visit page - always extracts content as text format"""
 
-    @browser(headless=True)
+    @browser(
+        headless=True,
+        block_images=True,  # Anti-detection: block images to appear more like a real user
+        add_arguments=[  # Anti-detection: add Chrome arguments to avoid detection
+            "--disable-blink-features=AutomationControlled",
+            "--disable-dev-shm-usage",
+        ],
+        max_retry=3,  # Auto-retry functionality
+        retry_wait=2,  # Wait 2 seconds between retries
+    )
     def _visit_page_internal(driver: Driver, data: Dict[str, Any]) -> Dict[str, Any]:
         """Internal task to visit a page and extract content as text"""
         url = data["url"]
@@ -188,13 +197,22 @@ def _visit_page_impl(url: str) -> Dict[str, Any]:
             return {"error": f"Invalid or unsafe URL: {url}"}
 
         try:
-            driver.get(url)
+            # Anti-detection: Use google_get or bypass_cloudflare if needed
+            # For general visits, use the standard get but with anti-detection enabled
+            driver.get(url, bypass_cloudflare=True)  # Enable anti-detection for Cloudflare
 
-            # Wait a bit for the page to load
-            driver.sleep(2)
+            # Anti-detection: Randomized sleep intervals to mimic human behavior
+            import random
+            sleep_time = random.uniform(1, 3)  # Random sleep between 1-3 seconds
+            driver.sleep(sleep_time)
 
             # Extract content as text (always use text format)
             content = driver.get_text("body")
+
+            # Anti-detection: Check if bot is detected
+            if hasattr(driver, 'is_bot_detected') and driver.is_bot_detected():
+                # If bot is detected, try to handle it appropriately
+                print(f"Bot detection triggered for URL: {url}")
 
             # Create a session for potential load_more functionality
             session_id = session_manager.create_session(driver)
@@ -235,7 +253,8 @@ def _visit_page_impl(url: str) -> Dict[str, Any]:
                 "content": chunked_content,
                 "format": "text",  # Always return "text" format
                 "chunk_index": 0,
-                "has_more_chunks": len(session['content_chunks']) > 1 if session else False
+                "has_more_chunks": len(session['content_chunks']) > 1 if session else False,
+                "session_id": session_id  # Include session_id for backward compatibility with tests
             }
 
         except Exception as e:
@@ -594,7 +613,16 @@ def read_chunk(chunk_index: int) -> Dict[str, Any]:
 def _scrape_social_profile_impl(platform: str, profile_url: str) -> Dict[str, Any]:
     """Internal implementation of scrape social profile"""
 
-    @browser(headless=True)
+    @browser(
+        headless=True,
+        block_images=True,  # Anti-detection: block images
+        add_arguments=[  # Anti-detection: add Chrome arguments to avoid detection
+            "--disable-blink-features=AutomationControlled",
+            "--disable-dev-shm-usage",
+        ],
+        max_retry=3,  # Auto-retry functionality
+        retry_wait=2,  # Wait 2 seconds between retries
+    )
     def _scrape_social_internal(driver: Driver, data: Dict[str, Any]) -> Dict[str, Any]:
         """Internal task to scrape social media profile information"""
         profile_url = data["profile_url"]
@@ -604,8 +632,16 @@ def _scrape_social_profile_impl(platform: str, profile_url: str) -> Dict[str, An
             return {"error": f"Invalid or unsafe URL: {profile_url}"}
 
         try:
-            driver.get(profile_url)
-            driver.sleep(3)  # Wait for page to load
+            driver.get(profile_url, bypass_cloudflare=True)  # Anti-detection: bypass Cloudflare
+
+            # Anti-detection: Randomized sleep intervals to mimic human behavior
+            import random
+            driver.sleep(random.uniform(2, 4))  # Random sleep between 2-4 seconds
+
+            # Anti-detection: Check if bot is detected
+            if hasattr(driver, 'is_bot_detected') and driver.is_bot_detected():
+                # If bot is detected, try to handle it appropriately
+                print(f"Bot detection triggered for social profile URL: {profile_url}")
 
             # Extract common profile elements (this would be customized per platform)
             profile_data = {
@@ -773,7 +809,16 @@ def extract_news_article(article_url: str, include_metadata: bool = True) -> Dic
 def _scrape_product_impl(product_url: str, include_reviews: bool = False) -> Dict[str, Any]:
     """Internal implementation of scrape product"""
 
-    @browser(headless=True)
+    @browser(
+        headless=True,
+        block_images=True,  # Anti-detection: block images
+        add_arguments=[  # Anti-detection: add Chrome arguments to avoid detection
+            "--disable-blink-features=AutomationControlled",
+            "--disable-dev-shm-usage",
+        ],
+        max_retry=3,  # Auto-retry functionality
+        retry_wait=2,  # Wait 2 seconds between retries
+    )
     def _scrape_product_internal(driver: Driver, data: Dict[str, Any]) -> Dict[str, Any]:
         """Internal task to scrape product information from e-commerce sites"""
         product_url = data["product_url"]
@@ -783,8 +828,16 @@ def _scrape_product_impl(product_url: str, include_reviews: bool = False) -> Dic
             return {"error": f"Invalid or unsafe URL: {product_url}"}
 
         try:
-            driver.get(product_url)
-            driver.sleep(3)  # Wait for page to load
+            driver.get(product_url, bypass_cloudflare=True)  # Anti-detection: bypass Cloudflare
+
+            # Anti-detection: Randomized sleep intervals to mimic human behavior
+            import random
+            driver.sleep(random.uniform(2, 4))  # Random sleep between 2-4 seconds
+
+            # Anti-detection: Check if bot is detected
+            if hasattr(driver, 'is_bot_detected') and driver.is_bot_detected():
+                # If bot is detected, try to handle it appropriately
+                print(f"Bot detection triggered for product URL: {product_url}")
 
             product_data = {
                 "url": product_url,
